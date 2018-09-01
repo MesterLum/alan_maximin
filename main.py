@@ -1,5 +1,6 @@
-from utils.constants import DATA, VALUE_P
+from utils.constants import DATA, VALUE_P, TEST
 from utils.process import Process
+from threading import Thread
 import json
 
 from flask import Flask, Response, request
@@ -29,7 +30,15 @@ def optimist_pesimist():
     Proc.set_table(req_data['data'])
     return Response(json.dumps(Proc.get_optimist_pesimist(req_data['valueP'])), status=200, mimetype='application/json')
 
+@app.route('/minimax', methods=['POST'])
+def minimax():
+    req_data = request.get_json()
+    Proc.set_table(req_data['data'])
+    return Response(json.dumps(Proc.get_results_minimax()), status=200, mimetype='application/json')
+
+
 if __name__ == '__main__':
-    #app.run(debug=True)
-    Proc.set_table(DATA)
-    print(Proc.get_results_minimax())
+    app.run(debug=True)
+        
+
+

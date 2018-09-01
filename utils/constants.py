@@ -1,5 +1,6 @@
 ROWS = 3
 DEBUG = False
+TEST = True
 VALUE_P = 0.6 
 COLUMNS = 3
 DATA = [
