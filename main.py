@@ -30,4 +30,6 @@ def optimist_pesimist():
     return Response(json.dumps(Proc.get_optimist_pesimist(req_data['valueP'])), status=200, mimetype='application/json')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    #app.run(debug=True)
+    Proc.set_table(DATA)
+    print(Proc.get_results_minimax())

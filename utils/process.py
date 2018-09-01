@@ -35,20 +35,38 @@ class Process:
         return self.__get_results_with_index(sorted(accum_values, reverse=True)[0],accum_values)
         
     def get_results_minimax(self):
-        pass
-        """
+        if not self.table:
+            return {'message': 'no data'}
         new_table = []
-        
-        for index in range(len(self.table[0]['values'])):
-            mini_table = [0] * len(self.table[0]['values'])
-            for sub_index in range(len(self.table)):
-                #print(self.table[sub_index]['values'][index])
-                mini_table[index] = self.table[sub_index]['values'][index]
-            print(mini_table)"""
-                
+        for sub_index, sub_data in enumerate(self.table[0]['values']):
+            sub_sub_table = []
+            for index, data in enumerate(self.table):
+                sub_sub_table.append(data['values'][sub_index])
 
-            #for index in range(len(data['values'])):
-        #print(new_table)
+            sub_table = sub_sub_table
+            copy_sub_table = sub_table
+            sub_table = sorted(sub_table, reverse=True)
+            value_max = sub_table[0]
+            index_in_sub_table = self.__get_index_for_sub_table(copy_sub_table, value_max)
+            copy_sub_table[index_in_sub_table] = 0
+            
+            for index_sub in range(len(copy_sub_table)):
+                if index_sub == index_in_sub_table:
+                    continue
+                copy_sub_table[index_sub] = value_max - copy_sub_table[index_sub]
+                if (DEBUG):
+                    print('get_results_minimax- Value in index: {} Value in index_sub: {}'.format(index, sub_table[index_sub]))
+            new_table.append(copy_sub_table)
+        values_accum = [0] * len(self.table)
+        
+        for index in range(len(new_table)):
+            for sub_index in range(len(new_table[index])):
+                values_accum[sub_index] = values_accum[sub_index] + new_table[index][sub_index]
+
+        for index, data in enumerate(values_accum):
+            values_accum[index] = (data / len(self.table[0]['values']))
+
+        return self.__get_results_with_index(sorted(values_accum)[0], values_accum)
 
     
 
