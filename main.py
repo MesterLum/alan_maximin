@@ -4,4 +4,6 @@ from utils.process import Process
 
 
 if __name__ == '__main__':
-    result_maximin = Process(DATA).get_results_maximin()
+    Proc = Process(DATA)
+    print(Proc.get_results_maximin())
+    print(Proc.get_results_maximax())

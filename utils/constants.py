@@ -1,5 +1,5 @@
 ROWS = 3
-DEBUG = True
+DEBUG = False
 COLUMNS = 3
 DATA = [
     {
@@ -8,7 +8,7 @@ DATA = [
     },
     {
         'name': 'TV',
-        'values': [250,200,300,500]
+        'values': [600,200,300,500]
     },
     {
         'name': 'Prensa',
@@ -17,5 +17,9 @@ DATA = [
     {
         'name': 'Periodico',
         'values': [100, 200, 300, 250]
+    },
+    {
+        'name': 'Telefono',
+        'values': [700, 100, 100, 550]
     }
 ]
