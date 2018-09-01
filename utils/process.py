@@ -6,17 +6,75 @@
 from .constants import DEBUG
 class Process:
 
-    def __init__(self, table):
+    def set_table(self, table):
         self.table = table
 
     def __str__(self):
         return 'Process'
+
+    """
+        !(value_p / 100) > 0 and < 1:
+            return {'value': 0}
+    
+    """
+
+    def get_optimist_pesimist(self, value_p):
+        value_q = 1 - value_p
+        if not ((value_p / 100) > 0 and (value_p / 100) < 1):
+            return {'value': 0}
+
+        accum_values = []
+        for value in self.__get_data_table():
+            values_sort = sorted(value['values'])
+            extrems_accum = (values_sort[0] * value_q) + (values_sort[len(values_sort) -1] * value_p)
+            accum_values.append(extrems_accum)
+
+        if (DEBUG):
+            print(accum_values)
+
+        return self.__get_results_with_index(sorted(accum_values, reverse=True)[0],accum_values)
+        
+    def get_results_minimax(self):
+        pass
+        """
+        new_table = []
+        
+        for index in range(len(self.table[0]['values'])):
+            mini_table = [0] * len(self.table[0]['values'])
+            for sub_index in range(len(self.table)):
+                #print(self.table[sub_index]['values'][index])
+                mini_table[index] = self.table[sub_index]['values'][index]
+            print(mini_table)"""
+                
+
+            #for index in range(len(data['values'])):
+        #print(new_table)
+
+    
+
+    def __get_index_for_sub_table(self, sub_table, value_max):
+        for index in range(len(sub_table)):
+            if value_max == sub_table[index]:
+                return index
 
     def get_results_maximin(self):
         return self.__get_max_or_min(1)
     
     def get_results_maximax(self):
         return self.__get_max_or_min(2)
+
+    def get_results_laplace(self):
+        values_accum = self.__accum_values()
+        return self.__get_results_with_index(sorted(values_accum, reverse=True)[0], values_accum)
+        
+    def __accum_values(self):
+        values_accum = []
+        for data in self.__get_data_table():
+            accum = 0
+            for values in data['values']:
+                accum = accum + values
+            values_accum.append(accum / len(data['values']))
+        return values_accum
 
     def __get_data_table(self):
         for data in self.table:
@@ -70,8 +128,9 @@ class Process:
         sub_table = []
         for data in self.__get_data_table():
             sub_table.append(data['values'][index])
+
             if (DEBUG):
                 print('__get_sub_table_with_index- Value push in sub-table: {} in index: {}'.format(data['values'][index], index))
-
+    
         return sub_table
 
