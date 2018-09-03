@@ -1,11 +1,19 @@
 from utils.constants import DATA, VALUE_P, TEST
 from utils.process import Process
 from threading import Thread
+
+from flask import Flask, Response, request, render_template
+from flask_cors import CORS
 import json
 
-from flask import Flask, Response, request
 app = Flask(__name__)
+CORS(app)
+
 Proc = Process()
+
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
 @app.route('/maximin', methods=['POST'])
 def maximin():
     req_data = request.get_json()

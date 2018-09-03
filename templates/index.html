@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='estilos.css') }}">
+    <script src="{{ url_for('static', filename='codigo.js') }}"></script>
+    <title>Maximin</title>
+</head>
+
+<body>
+    <div id="caja1">
+        <label>Número de filas:</label>
+        <input type="text" placeholder="0" id="y"><br>
+        <label>Número de columnas:</label>
+        <input type="text" placeholder="0" id="x"><br><br>
+        <button class="btn btn-outline-info" style="margin-top: 30px;" onclick="generar()">Generar tabla</button>
+        <button class="btn btn-outline-primary" style="margin-top: 30px;" onclick="resolver()">Resolver</button>
+    </div>
+    <select id="type" class="sele">
+        <option value="maximin">maximin</option>
+        <option value="maximax">maximax</option>
+        <option value="minimax">minimax</option>
+        <option value="laplace">laplace</option>
+        <option value="optimist_pesimist">optimista pesimista</option>            
+      </select>
+      <input type="text" name="" id="valueP" placeholder="value P">
+    <div id="resolucion">
+    </div>
+    <div id="caja2">
+        <table style="width:100%" id="tabla">
+
+        </table>
+    </div>
+
+</body>
+
+</html>
